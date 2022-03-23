@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
+    id ("org.sonarqube") version "3.3"
 }
 
 group = "com.woochamtv"
@@ -37,4 +38,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+sonarqube {
+    properties {
+        property ("sonar.projectKey", "woocham-TV_woocham_TV_backend_api")
+        property ("sonar.organization", "woocham-tv")
+        property ("sonar.host.url", "https://sonarcloud.io")
+    }
 }
