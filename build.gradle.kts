@@ -39,8 +39,7 @@ dependencies {
     implementation ("org.jetbrains.kotlin:kotlin-reflect")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    implementation ("com.graphql-java-kickstart:graphql-spring-boot-starter:12.0.0")
-    implementation ("com.graphql-java-kickstart:graphql-java-tools:12.0.2")
+    implementation ("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 
     testImplementation ("org.springframework.boot:spring-boot-starter-test")
 
