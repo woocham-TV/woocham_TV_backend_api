@@ -14,11 +14,12 @@ val exclusionList = arrayOf("**/*Application.**",
 plugins {
     id ("org.springframework.boot") version "2.6.4"
     id ("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin ("jvm") version "1.6.10"
-    kotlin ("plugin.spring") version "1.6.10"
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.spring") version "1.6.10"
     id ("org.sonarqube") version "3.3"
     jacoco
     groovy
+    kotlin("kapt") version "1.6.20"
 }
 
 group = "com.woochamtv"
@@ -40,13 +41,14 @@ dependencies {
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     implementation ("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     testImplementation ("org.springframework.boot:spring-boot-starter-test")
 
-    testImplementation ("org.spockframework:spock-core:2.0-groovy-3.0")
-    testImplementation ("org.spockframework:spock-spring:2.0-groovy-3.0")
+    testImplementation ("org.spockframework:spock-core:2.1-groovy-3.0")
+    testImplementation ("org.spockframework:spock-spring:2.1-groovy-3.0")
 
-    testRuntimeOnly ("org.codehaus.groovy:groovy:3.0.8")
+    testRuntimeOnly ("org.codehaus.groovy:groovy:3.0.10")
 }
 
 tasks.withType<KotlinCompile> {
