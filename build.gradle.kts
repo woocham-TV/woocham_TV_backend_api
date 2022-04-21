@@ -5,7 +5,9 @@ val exclusionList = arrayOf("**Application**",
     "**Response**",
     "**Repository**",
     "**Config**",
-    "**Exception**")
+    "**Exception**",
+    "**Error**",
+    "**Image**")
 
 plugins {
     id ("org.springframework.boot") version "2.6.4"
