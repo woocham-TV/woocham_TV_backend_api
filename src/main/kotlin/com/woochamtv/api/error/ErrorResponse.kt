@@ -1,15 +1,13 @@
 package com.woochamtv.api.error
 
-class ErrorResponse(errorCode: ErrorCode, reason: String) {
+class ErrorResponse(errorCode: ErrorCode) {
 
     val status: Int
-    val message: String
-    val reason: String
+    private val message: String
 
     init {
         status = errorCode.status
         message = errorCode.message
-        this.reason = reason
     }
 
 }

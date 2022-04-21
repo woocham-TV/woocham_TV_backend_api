@@ -2,6 +2,7 @@ package com.woochamtv.api.service
 
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.DeleteObjectRequest
+import com.woochamtv.api.error.exception.BadRequestException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
@@ -28,10 +29,8 @@ class ImageUploadService (
         val extension: String = file.extension
         val contentType: String? = image.contentType
 
-        if (!IMAGE_EXTENSION.contains(extension)) {
-            //throw WrongImageExtensionException(extension)
-        } else if (!IMAGE_CONTENT_TYPE.contains(contentType)) {
-            //throw WrongImageContentTypeException(contentType)
+        if (!IMAGE_EXTENSION.contains(extension) || !IMAGE_CONTENT_TYPE.contains(contentType)) {
+            throw BadRequestException()
         }
 
         val fileName: String = createFileName(extension)
@@ -54,7 +53,7 @@ class ImageUploadService (
         try {
             file.transferTo(image)
         } catch (e: IOException) {
-            //throw FileSaveFailedException(e)
+            throw BadRequestException()
         }
         return image
     }
