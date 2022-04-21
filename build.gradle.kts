@@ -1,15 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val exclusionList = arrayOf("**/*Application.**",
-    "**/AuthDetails.**",
-    "**/dto/**",
-    "**Request.**",
-    "**Response.**",
-    "**/domain/*/domain/**",
-    "**/domain/*/dao/**Repository.**",
-    "**/global/domain/**",
-    "**Config.**",
-    "**Exception.**")
+val exclusionList = arrayOf("**Application**",
+    "**Request**",
+    "**Response**",
+    "**Repository**",
+    "**Config**",
+    "**Exception**")
 
 plugins {
     id ("org.springframework.boot") version "2.6.4"
