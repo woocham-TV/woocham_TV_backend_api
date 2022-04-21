@@ -63,7 +63,7 @@ sonarqube {
         property ("sonar.projectKey", "woocham-TV_woocham_TV_backend_api")
         property ("sonar.organization", "woocham-tv")
         property ("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.exclusions", exclusionList)
+        property("sonar.coverage.exclusions", exclusionList.toMutableList())
     }
 }
 
@@ -73,7 +73,7 @@ tasks.jacocoTestReport {
         xml.required.set(true)
     }
 
-    executionData(files(exclusionList))
+    executionData(files(exclusionList.toMutableList()))
 
     finalizedBy(tasks.jacocoTestCoverageVerification)
 }
@@ -93,5 +93,5 @@ jacoco {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    finalizedBy ("jacocoTestReport")
+    finalizedBy (tasks.jacocoTestReport)
 }
