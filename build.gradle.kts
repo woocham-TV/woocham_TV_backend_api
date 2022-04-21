@@ -26,6 +26,10 @@ repositories {
     mavenCentral()
 }
 
+kotlin.sourceSets.test {
+    kotlin.srcDir("src/test/groovy")
+}
+
 dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-web")
     implementation ("org.springframework.boot:spring-boot-starter-validation")
@@ -54,11 +58,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-    finalizedBy ("jacocoTestReport")
-}
-
 sonarqube {
     properties {
         property ("sonar.projectKey", "woocham-TV_woocham_TV_backend_api")
@@ -68,20 +67,13 @@ sonarqube {
     }
 }
 
-kotlin.sourceSets.test {
-    kotlin.srcDir("src/test/groovy")
-}
-
-jacoco {
-    toolVersion = "0.8.7"
-}
-
 tasks.jacocoTestReport {
     reports {
         html.required.set(true)
         xml.required.set(true)
-        csv.required.set(false)
     }
+
+    executionData(files(exclusionList))
 
     finalizedBy(tasks.jacocoTestCoverageVerification)
 }
@@ -93,4 +85,13 @@ tasks.jacocoTestCoverageVerification {
             excludes = exclusionList.toMutableList()
         }
     }
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    finalizedBy ("jacocoTestReport")
 }
