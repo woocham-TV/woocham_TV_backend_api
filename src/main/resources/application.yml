@@ -2,12 +2,12 @@ spring:
   data:
     mongodb:
       auto-index-creation: true
-      host: ${MONGGO_HOST}
-      port: ${MONGGO_PORT}
-      database: ${MONGGO_DATABASE}
+      host: ${MONGODB_HOST}
+      port: ${MONGODB_PORT}
+      database: ${MONGODB_DATABASE}
       authentication-database: admin
-      username: ${MONGGO_USERNAME}
-      password: ${MONGGO_PASSWORD}
+      username: ${MONGODB_USERNAME}
+      password: ${MONGODB_PASSWORD}
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
