@@ -1,12 +1,9 @@
 package com.woochamtv.api.controller
 
-import com.woochamtv.api.payload.DeleteChannelRequest
-import com.woochamtv.api.payload.MakeChannelRequest
 import com.woochamtv.api.service.ChannelService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import javax.validation.Valid
 
 @RestController
 class ChannelController (
@@ -15,14 +12,16 @@ class ChannelController (
 
     @PostMapping("/channel")
     @ResponseStatus(HttpStatus.CREATED)
-    fun makeChannel(@Valid @RequestBody request: MakeChannelRequest, @RequestPart thumbnail: MultipartFile) {
-        channelService.makeChannel(request, thumbnail)
+    fun makeChannel(@RequestParam("constructor") constructor: String,
+                    @RequestParam("title") title: String,
+                    @RequestPart thumbnail: MultipartFile) {
+        channelService.makeChannel(constructor, title, thumbnail)
     }
 
     @DeleteMapping("/channel")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteChannel(@Valid @RequestBody request: DeleteChannelRequest) {
-        channelService.deleteChannel(request.constructor)
+    fun deleteChannel(@RequestParam("constructor") constructor: String) {
+        channelService.deleteChannel(constructor)
     }
 
 }

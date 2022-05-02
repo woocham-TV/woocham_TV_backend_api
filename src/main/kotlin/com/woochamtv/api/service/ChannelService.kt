@@ -3,7 +3,6 @@ package com.woochamtv.api.service
 import com.woochamtv.api.entity.Channel
 import com.woochamtv.api.error.exception.UserChannelConflictException
 import com.woochamtv.api.error.exception.UserChannelNotFoundException
-import com.woochamtv.api.payload.MakeChannelRequest
 import com.woochamtv.api.repository.ChannelRepository
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -14,10 +13,10 @@ class ChannelService (
     private val channelRepository: ChannelRepository
 ) {
 
-    fun makeChannel(request: MakeChannelRequest, thumbnail: MultipartFile) {
-        if (channelRepository.existsById(request.constructor)) throw UserChannelConflictException()
+    fun makeChannel(constructor: String, title: String, thumbnail: MultipartFile) {
+        if (channelRepository.existsById(constructor)) throw UserChannelConflictException()
         val url = imageUploadService.uploadImage(thumbnail)
-        val channel = Channel(request.constructor, request.title, url)
+        val channel = Channel(constructor, title, url)
         channelRepository.save(channel)
     }
 
