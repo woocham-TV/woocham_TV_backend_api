@@ -1,7 +1,9 @@
 spring:
   data:
     mongodb:
-      uri: test
+      host: test
+      port: 0000
+      database: test
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
