@@ -93,6 +93,10 @@ jacoco {
     toolVersion = "0.8.7"
 }
 
+tasks.getByName<Jar>("jar") {
+    enabled = false
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
     finalizedBy (tasks.jacocoTestReport)
