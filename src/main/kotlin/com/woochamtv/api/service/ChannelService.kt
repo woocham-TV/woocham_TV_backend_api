@@ -1,5 +1,6 @@
 package com.woochamtv.api.service
 
+import com.woochamtv.api.dto.ChannelResponse
 import com.woochamtv.api.entity.Channel
 import com.woochamtv.api.error.exception.UserChannelConflictException
 import com.woochamtv.api.error.exception.UserChannelNotFoundException
@@ -12,6 +13,12 @@ class ChannelService (
     private val imageUploadService: ImageUploadService,
     private val channelRepository: ChannelRepository
 ) {
+
+    fun getChannels(): List<ChannelResponse> {
+        return channelRepository.findAll().stream()
+            .map { channel -> ChannelResponse(channel.constructor, channel.title, channel.thumbnail) }
+            .toList()
+    }
 
     fun makeChannel(constructor: String, title: String, thumbnail: MultipartFile) {
         if (channelRepository.existsById(constructor)) throw UserChannelConflictException()
