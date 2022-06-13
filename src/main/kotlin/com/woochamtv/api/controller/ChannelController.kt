@@ -24,7 +24,7 @@ class ChannelController (
                     @RequestParam("profile_emoji") profileEmoji: String,
                     @RequestParam("title") title: String,
                     @RequestPart thumbnail: MultipartFile) {
-        channelService.makeChannel(constructor, profileName, profileName, title, thumbnail)
+        channelService.makeChannel(constructor, profileName, profileEmoji, title, thumbnail)
     }
 
     @DeleteMapping("/channel")
