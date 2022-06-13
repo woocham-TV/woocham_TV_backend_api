@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 class Channel(
     @Id
     val constructor: String,
+    val profileName: String,
+    val profileEmoji: String,
     val title: String,
     val thumbnail: String
 )

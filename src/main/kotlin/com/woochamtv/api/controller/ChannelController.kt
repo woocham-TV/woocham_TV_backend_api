@@ -20,9 +20,11 @@ class ChannelController (
     @PostMapping("/channel")
     @ResponseStatus(HttpStatus.CREATED)
     fun makeChannel(@RequestParam("constructor") constructor: String,
+                    @RequestParam("profile_name") profileName: String,
+                    @RequestParam("profile_emoji") profileEmoji: String,
                     @RequestParam("title") title: String,
                     @RequestPart thumbnail: MultipartFile) {
-        channelService.makeChannel(constructor, title, thumbnail)
+        channelService.makeChannel(constructor, profileName, profileName, title, thumbnail)
     }
 
     @DeleteMapping("/channel")

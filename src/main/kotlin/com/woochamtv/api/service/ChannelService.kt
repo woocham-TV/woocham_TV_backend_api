@@ -16,14 +16,15 @@ class ChannelService (
 
     fun getChannels(): List<ChannelResponse> {
         return channelRepository.findAll().stream()
-            .map { channel -> ChannelResponse(channel.constructor, channel.title, channel.thumbnail) }
+            .map { channel -> ChannelResponse(channel.constructor, channel.profileName, channel.profileEmoji, channel.title, channel.thumbnail) }
             .toList()
     }
 
-    fun makeChannel(constructor: String, title: String, thumbnail: MultipartFile) {
+    fun makeChannel(constructor: String, profileName: String,
+                    profileEmoji: String, title: String, thumbnail: MultipartFile) {
         if (channelRepository.existsById(constructor)) throw UserChannelConflictException()
         val url = imageUploadService.uploadImage(thumbnail)
-        val channel = Channel(constructor, title, url)
+        val channel = Channel(constructor, profileName, profileEmoji, title, url)
         channelRepository.save(channel)
     }
 
