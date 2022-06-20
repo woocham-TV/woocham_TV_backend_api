@@ -20,6 +20,13 @@ class ChannelService (
             .toList()
     }
 
+    fun getChannel(constructor: String): ChannelResponse {
+        return channelRepository.findByConstructor(constructor)
+            ?.let {
+                    channel -> ChannelResponse(channel.constructor, channel.profileName, channel.profileEmoji, channel.title, channel.thumbnail)
+            }?: throw UserChannelNotFoundException()
+    }
+
     fun makeChannel(constructor: String, profileName: String,
                     profileEmoji: String, title: String, thumbnail: MultipartFile) {
         if (channelRepository.existsById(constructor)) throw UserChannelConflictException()

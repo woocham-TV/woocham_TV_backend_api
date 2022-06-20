@@ -13,8 +13,13 @@ class ChannelController (
 ) {
 
     @GetMapping("/channels")
-    fun getChanels(): List<ChannelResponse> {
+    fun getChannels(): List<ChannelResponse> {
         return channelService.getChannels()
+    }
+
+    @GetMapping("/channel/{constructor}")
+    fun getChannel(@PathVariable("constructor") constructor: String): ChannelResponse {
+        return channelService.getChannel(constructor)
     }
 
     @PostMapping("/channel")
